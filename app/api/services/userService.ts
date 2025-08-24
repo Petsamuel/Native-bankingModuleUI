@@ -24,11 +24,35 @@ export const userService = {
     return client.post('/logout');
   },
 
-  // Enroll 
+// Enroll a user's voiceprint
+enrollVoice: (userId: number, voiceSample: any) => {
+    return client.post<{ success: boolean }>('/auth/enroll', { userId, voiceSample });
+},
 
-  // verify-transaction
+// Authenticate a user by voice
+authenticateVoice: (userId: number, voiceSample: any) => {
+    return client.post<{ token?: string; authenticated: boolean }>(
+        '/auth/authenticate',
+        { userId, voiceSample }
+    );
+},
 
- //   authenticte
+// Get user accounts
+getAccounts: (userId?: number) => {
+    return client.get<
+        { id: number; userId: number; balance: number; currency: string }[]
+    >('/accounts', { params: userId ? { userId } : undefined });
+},
+
+// Create a new transaction
+createTransaction: (transaction: { fromAccountId: number; toAccountId: number; amount: number; currency?: string }) => {
+    return client.post<any>('/transactions', transaction);
+},
+
+// Verify transaction with voice
+verifyTransaction: (transactionId: number, voiceSample: any) => {
+    return client.post<{ verified: boolean }>('/transactions/verify', { transactionId, voiceSample });
+},
 
 
   // Get all users

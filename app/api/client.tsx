@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://conversational-banking.onrender.com';
 
 if (!baseUrl) {
   throw new Error('BASE_URL is not defined in environment variables');

@@ -1,12 +1,12 @@
 
+import { Container } from '@/components/Container';
 import { Image, TextInput, View } from 'react-native';
 import { Button, HelperText, IconButton, Text } from 'react-native-paper';
-import { Container } from './components/Container';
 
 import { userService } from '@/app/api/services/userService';
-import { useApi } from '@/app/hooks/useApi';
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
+import { useApi } from '../hooks/useApi';
 const logo = require('../assets/images/logo.png');
 
 const Auth = () => {
@@ -40,8 +40,8 @@ const Auth = () => {
 
   };
   return (
-    <Container className="bg-primary flex justify-between flex-col ">
-      <View className="mt-[8rem] h-full">
+    <Container className="bg-primary flex justify-between flex-col">
+      <View className="">
               <View className='flex items-center justify-center'>
         <Image source={logo} className="w-32 h-32" style={{width: 200, height: 80}}/>
       </View>
@@ -70,22 +70,24 @@ const Auth = () => {
       </View>
       </View>
       {/* Voice  Login */}
-       <Link href="/voice-login" className="items-center flex flex-row justify-center ">
-        <IconButton
-          icon="microphone"
-          iconColor="white"
-          containerColor="#009FDF"
-          size={24}
-          onPress={() => {
-            console.log('Voice login pressed');
-          }}
-          style={{ borderRadius: 80, borderWidth: 1, borderColor: 'white' }}
-        />
-        <Text className='text-white' style={{color: 'white'}} >Use Voice Login</Text>
+       {/* <Link href="/voice-auth" className="flex w-full justify-center items-center"> */}
+       <View className='flex flex-row items-center justify-center gap-2 text-center'>
+         <IconButton
+           icon="microphone"
+           iconColor="white"
+           containerColor="#009FDF"
+           size={24}
+           onPress={() => {
+             console.log('Voice login pressed');
+           }}
+           style={{ borderRadius: 80, borderWidth: 1, borderColor: 'white' }}
+         />
+         <Text className='text-white' style={{color: 'white'}} >Use Voice Login</Text>
+       </View>
 
-      </Link>
+      {/* </Link> */}
 {/* Fingerprint Login */}
-      <View className="mt-34 items-center flex-row justify-center">
+      <View className="flex  items-center flex-row justify-center ">
         <IconButton
           icon="fingerprint"
           iconColor="white"
@@ -99,7 +101,7 @@ const Auth = () => {
         
       </View>
 
-        <View className='flex justify-between flex-row items-center mt-8'>
+        <View className='flex justify-between flex-row items-center '>
         <Button icon="map-marker" mode="text" textColor="white">Find Us</Button>
         <Text style={{ color: 'white', marginLeft: 8 }}>Get Help</Text>
 
