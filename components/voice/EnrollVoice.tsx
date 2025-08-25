@@ -1,6 +1,6 @@
 // Voice enrollment component
+import { userService } from '@/api/services/userService';
 import React from 'react';
-import { userService } from '../../app/api/services/userService';
 import VoiceRecorder from './VoiceRecorder';
 
 interface EnrollVoiceProps {

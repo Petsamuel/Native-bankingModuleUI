@@ -1,7 +1,7 @@
 import client from '../client';
 
 export interface User {
-  id: number;
+  id?: number;
   name: string;
   email: string;
   phone: string;
@@ -11,12 +11,12 @@ export interface User {
 export const userService = {
   // Register a new user
   register: (user: Omit<User, 'id'>) => {
-    return client.post<User>('/register', user);
+    return client.post<User>('/auth/register', user);
   },
 
   // Login a user
   login: (email: string, password: string) => {
-    return client.post<{ token: string }>('/login', { email, password });
+    return client.post<{ token: string }>('/auth/login', { email, password });
   },
 
   // Logout a user
@@ -56,29 +56,29 @@ verifyTransaction: (transactionId: number, voiceSample: any) => {
 
 
   // Get all users
-  getUsers: () => {
-    return client.get<User[]>('/users');
-  },
+  // getUsers: () => {
+  //   return client.get<User[]>('/users');
+  // },
 
-  // Get user by ID
-  getUser: (id: number) => {
-    return client.get<User>(`/users/${id}`);
-  },
+  // // Get user by ID
+  // getUser: (id: number) => {
+  //   return client.get<User>(`/users/${id}`);
+  // },
 
-  // Create a new user
-  createUser: (user: Omit<User, 'id'>) => {
-    return client.post<User>('/users', user);
-  },
+  // // Create a new user
+  // createUser: (user: Omit<User, 'id'>) => {
+  //   return client.post<User>('/users', user);
+  // },
 
-  // Update a user
-  updateUser: (id: number, user: Partial<User>) => {
-    return client.put<User>(`/users/${id}`, user);
-  },
+  // // Update a user
+  // updateUser: (id: number, user: Partial<User>) => {
+  //   return client.put<User>(`/users/${id}`, user);
+  // },
 
-  // Delete a user
-  deleteUser: (id: number) => {
-    return client.delete(`/users/${id}`);
-  },
+  // // Delete a user
+  // deleteUser: (id: number) => {
+  //   return client.delete(`/users/${id}`);
+  // },
 
 
 

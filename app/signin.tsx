@@ -1,19 +1,20 @@
 
+import { userService } from '@/api/services/userService';
 import { Container } from '@/components/Container';
-import { Image, TextInput, View } from 'react-native';
-import { Button, HelperText, IconButton, Text } from 'react-native-paper';
-
-import { userService } from '@/app/api/services/userService';
+import { VoiceRecorder } from '@/components/voice';
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
-import { useApi } from '../hooks/useApi';
+import { Image, TextInput, View } from 'react-native';
+import { Button, HelperText, IconButton, Text } from 'react-native-paper';
+// import { useApi } from '../hooks/useApi';
 const logo = require('../assets/images/logo.png');
 
-const Auth = () => {
+const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { data: users, error, status } = useApi(userService.getUsers);
+  const [error, setError] = useState('');
+  // const { data: users, error, status } = useApi(userService.getUsers);
   // const theme = useTheme();
   const handleSignIn = async () => {
     if (!email || !password) {
@@ -35,13 +36,13 @@ const Auth = () => {
 
     if (status === 'success') {
       // Navigate to the home screen or perform any other action
-      console.log('User data:', users);
+      // console.log('User data:', users);
     }
 
   };
   return (
     <Container className="bg-primary flex justify-between flex-col">
-      <View className="">
+      <View>
               <View className='flex items-center justify-center'>
         <Image source={logo} className="w-32 h-32" style={{width: 200, height: 80}}/>
       </View>
@@ -52,7 +53,7 @@ const Auth = () => {
       </View>
       <View>
         <Text style={{ color: 'white' }}>Password</Text>/
-        <TextInput style={styles.inputField} value={password} onChangeText={setPassword} />
+        <TextInput style={styles.inputField} value={password} onChangeText={setPassword} secureTextEntry />
       </View>
       </View>
       {error && <HelperText type='error' visible={!!error} style={{ color: "white" }}>
@@ -70,6 +71,9 @@ const Auth = () => {
       </View>
       </View>
       {/* Voice  Login */}
+      <View>
+        <VoiceRecorder />
+      </View>
        {/* <Link href="/voice-auth" className="flex w-full justify-center items-center"> */}
        <View className='flex flex-row items-center justify-center gap-2 text-center'>
          <IconButton
@@ -110,7 +114,7 @@ const Auth = () => {
   )
 }
 
-export default Auth;
+export default SignIn;
 
 const styles = {
   inputField: {
